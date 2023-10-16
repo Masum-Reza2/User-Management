@@ -6,4 +6,5 @@ const useGlobal = () => {
     return all;
 }
 
+
 export default useGlobal;

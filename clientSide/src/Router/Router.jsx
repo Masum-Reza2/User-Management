@@ -15,7 +15,7 @@ const Router = createBrowserRouter([
         children: [
             { path: '/', element: <Home />, loader: () => fetch('http://localhost:5000/teas') },
             { path: '/addTea', element: <AddTea /> },
-            { path: '/users', element: <Users /> },
+            { path: '/users', element: <Users />, loader: () => fetch('http://localhost:5000/users') },
             { path: '/login', element: <Login /> },
             { path: '/register', element: <Register /> },
             { path: '/updateTea/:id', element: <UpdateTea />, loader: ({ params }) => fetch(`http://localhost:5000/tea/${params.id}`) }

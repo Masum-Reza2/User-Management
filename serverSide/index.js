@@ -82,6 +82,39 @@ async function run() {
             res.send(result)
         })
 
+
+
+        // Users realted api
+        const UserCollection = database.collection("user");
+
+        // craete
+        app.post('/user', async (req, res) => {
+            const user = req.body;
+            const result = await UserCollection.insertOne(user);
+            res.send(result)
+        })
+
+        // update
+        app.patch('/user', async (req, res) => {
+            const user = req.body;
+            const filter = { userEmail: user.email };
+            const updateDoc = {
+                $set: {
+                    lastLoginTime: user.lastLoginTime,
+                },
+            };
+
+            const result = await UserCollection.updateOne(filter, updateDoc);
+            res.send(result);
+        })
+
+        // read 
+        app.get('/users', async (req, res) => {
+            const cursor = UserCollection.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
