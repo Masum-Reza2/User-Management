@@ -28,6 +28,15 @@ async function run() {
         await client.connect();
 
         // Tea Related API's
+        const database = client.db("teaDB");
+        const teaCollection = database.collection("tea");
+
+        // Create operation
+        app.post('/tea', async (req, res) => {
+            const newTea = req.body;
+            const result = await teaCollection.insertOne(newTea);
+            res.send(result);
+        })
 
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
