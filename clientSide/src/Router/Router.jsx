@@ -6,6 +6,7 @@ import Users from "../Pages/Users"
 import Login from "../Pages/Login"
 import Register from "../Pages/Register"
 import UpdateTea from "../Components/UpdateTea"
+import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
 const Router = createBrowserRouter([
     {
@@ -13,9 +14,11 @@ const Router = createBrowserRouter([
         element: <MainLayOut />,
         errorElement: <h1>Opps something wrong</h1>,
         children: [
-            { path: '/', element: <Home />, loader: () => fetch('http://localhost:5000/teas') },
-            { path: '/addTea', element: <AddTea /> },
-            { path: '/users', element: <Users />, loader: () => fetch('http://localhost:5000/users') },
+            { path: '/', element: <PrivateRoute><Home /></PrivateRoute>, loader: () => fetch('http://localhost:5000/teas') },
+            { path: '/addTea', element: <PrivateRoute><AddTea /></PrivateRoute> },
+            { path: '/users', element: <PrivateRoute><Users /></PrivateRoute>, loader: () => fetch('http://localhost:5000/users') },
+
+
             { path: '/login', element: <Login /> },
             { path: '/register', element: <Register /> },
             { path: '/updateTea/:id', element: <UpdateTea />, loader: ({ params }) => fetch(`http://localhost:5000/tea/${params.id}`) }

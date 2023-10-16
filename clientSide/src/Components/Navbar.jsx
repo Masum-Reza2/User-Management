@@ -1,6 +1,20 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
+import useGlobal from "../Hooks/useGlobal"
+import { signOut } from "firebase/auth";
+import auth from "../Firebase/firebase.config";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const { user } = useGlobal();
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                Swal.fire('Log Out successfull');
+                navigate('/login')
+            })
+    }
 
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
@@ -30,7 +44,12 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Login</a>
+                    {
+                        user ?
+                            <button className="btn btn-outline" onClick={handleLogout}>LogOut</button>
+                            :
+                            <NavLink to={'/login'} className="btn">Login</NavLink>
+                    }
                 </div>
             </div>
         </div>

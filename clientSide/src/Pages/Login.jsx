@@ -1,9 +1,10 @@
 import Swal from "sweetalert2";
 import useGlobal from "../Hooks/useGlobal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     const { loginUser } = useGlobal();
 
@@ -33,7 +34,7 @@ const Login = () => {
                     .then((response) => response.json())
                     .then((json) => {
                         console.log(json)
-                        navigate('/')
+                        navigate(state || '/')
                     });
             })
             .catch(error => {
