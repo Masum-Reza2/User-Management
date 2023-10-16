@@ -24,7 +24,7 @@ const Login = () => {
                 // updattin login time in database
                 const lastLoginTime = user?.metadata?.lastSignInTime
                 const doc = { email, lastLoginTime }
-                fetch('http://localhost:5000/user', {
+                fetch('https://server-side-fz2dd7k4e-masum-rezas-projects.vercel.app/user', {
                     method: 'PATCH',
                     body: JSON.stringify(doc),
                     headers: {

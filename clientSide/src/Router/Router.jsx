@@ -14,14 +14,14 @@ const Router = createBrowserRouter([
         element: <MainLayOut />,
         errorElement: <h1>Opps something wrong</h1>,
         children: [
-            { path: '/', element: <PrivateRoute><Home /></PrivateRoute>, loader: () => fetch('http://localhost:5000/teas') },
+            { path: '/', element: <PrivateRoute><Home /></PrivateRoute>, loader: () => fetch('https://server-side-fz2dd7k4e-masum-rezas-projects.vercel.app/teas') },
             { path: '/addTea', element: <PrivateRoute><AddTea /></PrivateRoute> },
-            { path: '/users', element: <PrivateRoute><Users /></PrivateRoute>, loader: () => fetch('http://localhost:5000/users') },
+            { path: '/users', element: <PrivateRoute><Users /></PrivateRoute>, loader: () => fetch('https://server-side-fz2dd7k4e-masum-rezas-projects.vercel.app/users') },
 
 
             { path: '/login', element: <Login /> },
             { path: '/register', element: <Register /> },
-            { path: '/updateTea/:id', element: <UpdateTea />, loader: ({ params }) => fetch(`http://localhost:5000/tea/${params.id}`) }
+            { path: '/updateTea/:id', element: <UpdateTea />, loader: ({ params }) => fetch(`https://server-side-fz2dd7k4e-masum-rezas-projects.vercel.app/tea/${params.id}`) }
         ]
     }
 ])

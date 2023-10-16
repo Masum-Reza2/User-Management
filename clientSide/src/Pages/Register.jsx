@@ -30,7 +30,7 @@ const Register = () => {
                 const userVerified = newUser?.emailVerified;
                 const createdAt = newUser?.metadata?.creationTime;
                 const doc = { userEmail, userVerified, createdAt }
-                fetch('http://localhost:5000/user', {
+                fetch('https://server-side-fz2dd7k4e-masum-rezas-projects.vercel.app/user', {
                     method: 'POST',
                     body: JSON.stringify(doc),
                     headers: {

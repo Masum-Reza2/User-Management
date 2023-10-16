@@ -32,7 +32,7 @@ const UpdateTea = () => {
             if (result.isConfirmed) {
 
                 //  client side update operation
-                fetch(`http://localhost:5000/tea/${_id}`, {
+                fetch(`https://server-side-fz2dd7k4e-masum-rezas-projects.vercel.app/tea/${_id}`, {
                     method: 'PATCH',
                     body: JSON.stringify(updatedTea),
                     headers: {

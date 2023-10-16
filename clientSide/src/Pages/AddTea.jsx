@@ -15,7 +15,7 @@ const AddTea = () => {
 
         const newTea = { name, quantity, taste, color, price, category, photo };
 
-        fetch('http://localhost:5000/tea', {
+        fetch('https://server-side-fz2dd7k4e-masum-rezas-projects.vercel.app/tea', {
             method: 'POST',
             body: JSON.stringify(newTea),
             headers: {
