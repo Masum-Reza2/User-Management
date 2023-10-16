@@ -12,7 +12,7 @@ const Router = createBrowserRouter([
         element: <MainLayOut />,
         errorElement: <h1>Opps something wrong</h1>,
         children: [
-            { path: '/', element: <Home /> },
+            { path: '/', element: <Home />, loader: () => fetch('http://localhost:5000/teas') },
             { path: '/addTea', element: <AddTea /> },
             { path: '/users', element: <Users /> },
             { path: '/login', element: <Login /> },

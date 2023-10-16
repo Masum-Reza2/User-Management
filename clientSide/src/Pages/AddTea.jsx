@@ -32,6 +32,13 @@ const AddTea = () => {
                     })
                     form.reset();
                 }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops',
+                        text: 'Something went wrong!',
+                    })
+                }
             });
     }
 
