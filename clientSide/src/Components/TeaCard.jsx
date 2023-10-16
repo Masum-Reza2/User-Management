@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
@@ -71,7 +72,9 @@ const TeaCard = ({ tea, teas, setTeas }) => {
                 </div>
                 <div className="btn-group pb-3 justify-center space-x-2">
                     <button className="btn">View</button>
-                    <button className="btn">Update</button>
+                    <Link to={`/updateTea/${_id}`}>
+                        <button className="btn">Update</button>
+                    </Link>
                     <button className="btn" onClick={() => handleDelete(_id)}>Delete</button>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import AddTea from "../Pages/AddTea"
 import Users from "../Pages/Users"
 import Login from "../Pages/Login"
 import Register from "../Pages/Register"
+import UpdateTea from "../Components/UpdateTea"
 
 const Router = createBrowserRouter([
     {
@@ -16,7 +17,8 @@ const Router = createBrowserRouter([
             { path: '/addTea', element: <AddTea /> },
             { path: '/users', element: <Users /> },
             { path: '/login', element: <Login /> },
-            { path: '/register', element: <Register /> }
+            { path: '/register', element: <Register /> },
+            { path: '/updateTea/:id', element: <UpdateTea />, loader: ({ params }) => fetch(`http://localhost:5000/tea/${params.id}`) }
         ]
     }
 ])

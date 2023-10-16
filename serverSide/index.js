@@ -54,6 +54,33 @@ async function run() {
         })
 
         // Update operation
+        // get single
+        app.get('/tea/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await teaCollection.findOne(query);
+            res.send(result);
+        })
+
+        app.patch('/tea/:id', async (req, res) => {
+            const id = req.params.id;
+            const tobeUpdate = req.body;
+            const filter = { _id: new ObjectId(id) };
+            console.log(tobeUpdate);
+            const updateDoc = {
+                $set: {
+                    name: tobeUpdate.name,
+                    quantity: tobeUpdate.quantity,
+                    taste: tobeUpdate.taste,
+                    color: tobeUpdate.color,
+                    price: tobeUpdate.price,
+                    category: tobeUpdate.category,
+                    photo: tobeUpdate.photo
+                },
+            };
+            const result = await teaCollection.updateOne(filter, updateDoc);
+            res.send(result)
+        })
 
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
