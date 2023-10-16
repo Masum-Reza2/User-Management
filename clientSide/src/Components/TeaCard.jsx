@@ -1,6 +1,50 @@
-const TeaCard = ({ tea }) => {
+import Swal from "sweetalert2";
 
-    const { name, quantity, taste, color, price, category, photo, _id } = tea
+/* eslint-disable react/prop-types */
+const TeaCard = ({ tea, teas, setTeas }) => {
+
+    const { name, price, photo, _id } = tea;
+
+    const handleDelete = (id) => {
+        //  are you sure you want to delete
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/teas/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        // update UI state here
+                        if (data.acknowledged) {
+                            let remaining = teas?.filter(tea => tea._id !== id);
+                            setTeas(remaining);
+                        }
+                    })
+
+                Swal.fire(
+                    'Deleted!',
+                    'Your tea has been deleted.',
+                    'success'
+                )
+            }
+            else {
+                Swal.fire(
+                    'Cancelled!',
+                    'Your file is safe!.',
+                    'error'
+                )
+            }
+        })
+    }
 
     return (
         <div>
@@ -17,7 +61,7 @@ const TeaCard = ({ tea }) => {
                             {name}
                         </p>
                         <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                            {price}
+                            ${price}
                         </p>
                     </div>
                     <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
@@ -25,7 +69,11 @@ const TeaCard = ({ tea }) => {
                         available wireless charging case.
                     </p>
                 </div>
-
+                <div className="btn-group pb-3 justify-center space-x-2">
+                    <button className="btn">View</button>
+                    <button className="btn">Update</button>
+                    <button className="btn" onClick={() => handleDelete(_id)}>Delete</button>
+                </div>
             </div>
         </div>
     )
